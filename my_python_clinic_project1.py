@@ -548,52 +548,42 @@ def handle_seeking_advice_pattern(user_input):
 
 
 # Function to handle the main argument session
-
 def main():
     """
     Main function to run the argument clinic session.
     """
 
-    st.title('Welcome to the Python Argument Clinic!')
-    st.write('''Here is a sample conversation to give you an idea of the interaction at the clinic:
+    print(f'''Welcome to the Python Argument Clinic!\nHere is a sample conversation to give you an idea of the interaction at the clinic:
 
     User: "I think this is silly."
     Clinic: "Have you considered the opposite?"
     User: "Yes, but it's still silly."
     Clinic: "Is 'silly' not a matter of perspective?"
     ''')
-
-    # Sidebar for configuration
-    with st.sidebar:
-        st.write("Configure your argument session:")
-        start_argument = st.selectbox("Would you like to start an argument?", ["Yes", "No"])
-        if start_argument == "Yes":
-            argue_time = st.slider("How many minutes would you like to argue?", 1, 60)
-
-    start_time = 0
-    end_time = 0
-
-    if start_argument == "Yes":
+    start_argument = st.text_input("Would you like to start an argument? (yes/no): ").strip().lower()
+    if start_argument.strip().lower() == "yes":
+        # User input for the duration of the argument
+        argue_time = st.number_input("How many minutes would you like to argue? (enter the number of minutes): ", min_value=1, max_value=60, step=1)
         start_time = time.time() / 60
-        end_time = start_time + argue_time
+        end_time = start_time + argue_time  # Calculate the end time
         st.write("\nThe Argument Clinic is open! What is your first argument? ")
         st.write("\n**(Note: you can type 'exit' to end the argument at any point you want.)\n")
 
-    # Main argument session loop
-    while time.time() / 60 < end_time:
-        user_input = st.text_input("User:", key=f"user_input_{time.time()}").strip().lower()
+        # Main argument session loop
+        while time.time() / 60 < end_time:
+            user_input = st.text_input("User: ").strip().lower()
 
-        if user_input.lower().strip() == "exit":
-            break
+            if user_input.lower().strip() == "exit":
+                break
 
-        response = parse_input(user_input)
-        st.write(f"Clinic: {response}")
+            response = parse_input(user_input)
+            st.write(f"Clinic: {response}")  # Print the response
 
-        if time.time() / 60 >= end_time:
-            break
+            if time.time() / 60 >= end_time:
+                break
 
-    st.write("The argument clinic session is over. Thanks for participating!\nHave a great day!")
+        st.write("The argument clinic session is over, Thanks for participating.\nHave a great day!")
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # This block executes when the script is run as the main program.
     main()
