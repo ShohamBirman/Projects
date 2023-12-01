@@ -569,12 +569,12 @@ def main():
         start_time = time.time() / 60
         end_time = start_time + argue_time  # Calculate the end time
 
-        st.subheader("\nThe Argument Clinic is open! What is your first argument? ")
+        st.markdown("\nThe Argument Clinic is open! What is your first argument? ")
         st.markdown("\n(**Note:** you can type 'exit' to end the argument at any point you want.)\n")
 
         # Main argument session loop
         while time.time() / 60 < end_time:
-            user_input = st.text_area("User:", "").strip().lower()
+            user_input = st.text_area("User:").strip().lower()
 
             if user_input.lower().strip() == "exit":
                 break
