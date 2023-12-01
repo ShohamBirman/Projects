@@ -565,12 +565,12 @@ def main():
     start_argument = st.text_input("Would you like to start an argument? (yes/no): ").strip().lower()
     if start_argument.strip().lower() == "yes":
         # User input for the duration of the argument
-        argue_time = st.number_input("How many minutes would you like to argue? (enter the number of minutes): ", min_value=1, step=1)
+        argue_time = st.number_input("How many minutes would you like to argue? (enter the number of minutes): ", min_value=1, step=1, key="argue_time")
         start_time = time.time() / 60
         end_time = start_time + argue_time  # Calculate the end time
 
-        st.title("\nThe Argument Clinic is open! What is your first argument? ")
-        st.write("\n**(Note: you can type 'exit' to end the argument at any point you want.)\n")
+        st.subheader("\nThe Argument Clinic is open! What is your first argument? ")
+        st.markdown("\n(**Note:** you can type 'exit' to end the argument at any point you want.)\n")
 
         # Main argument session loop
         while time.time() / 60 < end_time:
