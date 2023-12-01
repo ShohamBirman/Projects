@@ -571,9 +571,11 @@ def main():
         if not argue_time:
             pass
         else:
-            st.markdown(f"**The** **Argument** **Clinic** **is** **open!** **What** **is** **your** **first** **argument?** ")
-            st.markdown("(**Note:** you can type 'exit' to end the argument at any point you want.)\n")
-            st.markdown('<span style="color: red;">This is red text</span>', unsafe_allow_html=True)
+            st.markdown(
+                f'**The** **Argument** **Clinic** **is** **open!** **What** **is** **your** **first** **argument?** ')
+            st.markdown("(**Note:** you can type 'exit' to end the argument at any point you want.)\n",
+                        '<span style="color: red;">This is red text</span>', unsafe_allow_html=True)
+
         # Main argument session loop
         while time.time() / 60 < end_time:
             user_input = st.text_area("User:").strip().lower()
