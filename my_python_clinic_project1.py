@@ -565,7 +565,7 @@ def main():
     start_argument = st.text_input("Would you like to start an argument? (yes/no): ").strip().lower()
     if start_argument.strip().lower() == "yes":
         # User input for the duration of the argument
-        argue_time = st.number_input("How many minutes would you like to argue? (enter the number of minutes): ", min_value=0, step=1, key="argue_time")
+        argue_time = st.number_input("How many minutes would you like to argue? (enter the number of minutes): ", min_value=1, key="argue_time")
         start_time = time.time() / 60
         end_time = start_time + argue_time  # Calculate the end time
         if not argue_time:
