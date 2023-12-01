@@ -561,25 +561,26 @@ def main():
     User: "Yes, but it's still silly."
     Clinic: "Is 'silly' not a matter of perspective?"
     ''')
-    
+
     start_argument = st.text_input("Would you like to start an argument? (yes/no): ").strip().lower()
     if start_argument.strip().lower() == "yes":
         # User input for the duration of the argument
         argue_time = st.number_input("How many minutes would you like to argue? (enter the number of minutes): ", min_value=1, max_value=60, step=1)
         start_time = time.time() / 60
         end_time = start_time + argue_time  # Calculate the end time
-        st.write("\nThe Argument Clinic is open! What is your first argument? ")
-        st.write("\n**(Note: you can type 'exit' to end the argument at any point you want.)\n")
+        if argue_time:
+            st.write("\nThe Argument Clinic is open! What is your first argument? ")
+            st.write("\n**(Note: you can type 'exit' to end the argument at any point you want.)\n")
 
         # Main argument session loop
         while time.time() / 60 < end_time:
-            user_input = st.text_input("User: ").strip().lower()
+            user_input = st.chat_input("User: ").strip().lower()
 
             if user_input.lower().strip() == "exit":
                 break
 
             response = parse_input(user_input)
-            st.write(f"Clinic: {response}")  # Print the response
+            st.chat_message(f"Clinic: {response}")  # Print the response
 
             if time.time() / 60 >= end_time:
                 break
