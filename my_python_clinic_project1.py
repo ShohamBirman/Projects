@@ -580,8 +580,8 @@ def main():
 
             #user_input = text_area("User:", "").strip().lower()
 
-            user_input = st.text_area("User:", value="", key="user_input").strip().lower()
-            
+            user_input = st.text_area("User:", "").strip().lower()
+
 
             if user_input.lower().strip() == "exit":
                 break
