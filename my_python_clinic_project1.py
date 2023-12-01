@@ -553,13 +553,15 @@ def main():
     Main function to run the argument clinic session.
     """
 
-    print(f'''Welcome to the Python Argument Clinic!\nHere is a sample conversation to give you an idea of the interaction at the clinic:
+    st.title('Welcome to the Python Argument Clinic!')
+    st.write(f'''Here is a sample conversation to give you an idea of the interaction at the clinic:
 
     User: "I think this is silly."
     Clinic: "Have you considered the opposite?"
     User: "Yes, but it's still silly."
     Clinic: "Is 'silly' not a matter of perspective?"
     ''')
+    
     start_argument = st.text_input("Would you like to start an argument? (yes/no): ").strip().lower()
     if start_argument.strip().lower() == "yes":
         # User input for the duration of the argument
