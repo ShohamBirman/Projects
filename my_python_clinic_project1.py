@@ -581,7 +581,7 @@ def main():
 
     # Main argument session loop
     while time.time() / 60 < end_time:
-        user_input = st.text_input("User: ").strip().lower()
+        user_input = st.text_input("User:", key=f"user_input_{time.time()}").strip().lower()
 
         if user_input.lower().strip() == "exit":
             break
