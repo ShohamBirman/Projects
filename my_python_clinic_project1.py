@@ -565,12 +565,14 @@ def main():
     start_argument = st.text_input("Would you like to start an argument? (yes/no): ").strip().lower()
     if start_argument.strip().lower() == "yes":
         # User input for the duration of the argument
-        argue_time = st.number_input("How many minutes would you like to argue? (enter the number of minutes): ", min_value=1, step=1, key="argue_time")
+        argue_time = st.number_input("How many minutes would you like to argue? (enter the number of minutes): ", min_value=0, step=1, key="argue_time")
         start_time = time.time() / 60
         end_time = start_time + argue_time  # Calculate the end time
-
-        st.markdown("\nThe Argument Clinic is open! What is your first argument? ")
-        st.markdown("\n(**Note:** you can type 'exit' to end the argument at any point you want.)\n")
+        if not argue_time:
+            pass
+        else:
+            st.write("**\nThe Argument Clinic is open! What is your first argument? **")
+            st.markdown("\n(**Note:** you can type 'exit' to end the argument at any point you want.)\n")
 
         # Main argument session loop
         while time.time() / 60 < end_time:
@@ -579,7 +581,7 @@ def main():
             if user_input.lower().strip() == "exit":
                 break
             # Generate a unique widget ID dynamically
-            submit_button = st.button("Submit" + str(time.time()))
+            submit_button = st.button("Submit")
 
             if submit_button:
                 response = parse_input(user_input)
