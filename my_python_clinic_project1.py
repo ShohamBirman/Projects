@@ -586,7 +586,7 @@ def main():
             if submit_button:
                 response = parse_input(user_input)
                 st.write(f"Clinic: {response}")  # Display the response
-                user_input = st.empty
+                st.empty()
 
             if time.time() / 60 >= end_time:
                 break
