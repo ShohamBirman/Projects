@@ -569,29 +569,29 @@ def main():
         argue_time = st.number_input("How many minutes would you like to argue? (enter the number of minutes): ", min_value=1, key="argue_time")
         start_time = time.time() / 60
         end_time = start_time + argue_time  # Calculate the end time
+        if argue_time:
+            st.markdown("The Argument Clinic is open! What is your first argument? ")
+            st.markdown("(**Note:** you can type 'exit' to end the argument at any point you want.)\n")
 
-        st.markdown("The Argument Clinic is open! What is your first argument? ")
-        st.markdown("(**Note:** you can type 'exit' to end the argument at any point you want.)\n")
+            # Main argument session loop
+            while time.time() / 60 < end_time:
 
-        # Main argument session loop
-        while time.time() / 60 < end_time:
+                user_input = text_area("User:", "").strip().lower()
 
-            user_input = text_area("User:", "").strip().lower()
+                if user_input.lower().strip() == "exit":
+                    break
+                # Generate a unique widget ID dynamically
+                submit_button = st.button("Submit")
 
-            if user_input.lower().strip() == "exit":
-                break
-            # Generate a unique widget ID dynamically
-            submit_button = st.button("Submit")
+                if submit_button:
+                    response = parse_input(user_input)
+                    st.write(f"Clinic: {response}")  # Display the response
 
-            if submit_button:
-                response = parse_input(user_input)
-                st.write(f"Clinic: {response}")  # Display the response
-                
 
-            if time.time() / 60 >= end_time:
-                break
+                if time.time() / 60 >= end_time:
+                    break
 
-        st.write("The argument clinic session is over, Thanks for participating.\nHave a great day!")
+            st.write("The argument clinic session is over, Thanks for participating.\nHave a great day!")
 
 
 if __name__ == "__main__":  # This block executes when the script is run as the main program.
