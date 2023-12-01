@@ -565,7 +565,7 @@ def main():
     start_argument = st.text_input("Would you like to start an argument? (yes/no): ").strip().lower()
     if start_argument.strip().lower() == "yes":
         # User input for the duration of the argument
-        argue_time = st.number_input("How many minutes would you like to argue? (enter the number of minutes): ", min_value=1, max_value=60, step=1)
+        argue_time = st.number_input("How many minutes would you like to argue? (enter the number of minutes): ", min_value=1, step=1)
         start_time = time.time() / 60
         end_time = start_time + argue_time  # Calculate the end time
         if not argue_time:
@@ -576,13 +576,13 @@ def main():
 
         # Main argument session loop
         while time.time() / 60 < end_time:
-            user_input = st.text_input("User: ").strip().lower()
+            user_input = st.text_area("User:", "").strip().lower()
 
             if user_input.lower().strip() == "exit":
                 break
-
-            response = parse_input(user_input)
-            st.write(f"Clinic: {response}")  # Print the response
+            if st.button("Submit"):
+                response = parse_input(user_input)
+                st.write(f"Clinic: {response}")  # Display the response
 
             if time.time() / 60 >= end_time:
                 break
