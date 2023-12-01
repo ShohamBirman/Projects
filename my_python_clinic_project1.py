@@ -568,11 +568,9 @@ def main():
         argue_time = st.number_input("How many minutes would you like to argue? (enter the number of minutes): ", min_value=1, step=1)
         start_time = time.time() / 60
         end_time = start_time + argue_time  # Calculate the end time
-        if not argue_time:
-            pass
-        else:
-            st.write("\nThe Argument Clinic is open! What is your first argument? ")
-            st.write("\n**(Note: you can type 'exit' to end the argument at any point you want.)\n")
+
+        st.title("\nThe Argument Clinic is open! What is your first argument? ")
+        st.write("\n**(Note: you can type 'exit' to end the argument at any point you want.)\n")
 
         # Main argument session loop
         while time.time() / 60 < end_time:
@@ -580,7 +578,10 @@ def main():
 
             if user_input.lower().strip() == "exit":
                 break
-            if st.button("Submit"):
+            # Generate a unique widget ID dynamically
+            submit_button = st.button("Submit" + str(time.time()))
+
+            if submit_button:
                 response = parse_input(user_input)
                 st.write(f"Clinic: {response}")  # Display the response
 
