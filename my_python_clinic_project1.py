@@ -571,8 +571,8 @@ def main():
         if not argue_time:
             pass
         else:
-            st.write("**\nThe Argument Clinic is open! What is your first argument? **")
-            st.markdown("\n(**Note:** you can type 'exit' to end the argument at any point you want.)\n")
+            st.markdown("**The Argument Clinic is open! What is your first argument? **")
+            st.markdown("(**Note:** you can type 'exit' to end the argument at any point you want.)\n")
 
         # Main argument session loop
         while time.time() / 60 < end_time:
