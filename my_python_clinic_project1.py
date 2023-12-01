@@ -561,6 +561,10 @@ def main():
     User: "Yes, but it's still silly."
     Clinic: "Is 'silly' not a matter of perspective?"
     ''')
+    # Create a placeholder for the user input window
+    user_input_placeholder = st.empty()
+    # Clear the user input window at the beginning of each session
+    user_input_placeholder.text_area("User:", value="", key="user_input")
 
     start_argument = st.text_input("Would you like to start an argument? (yes/no): ").strip().lower()
     if start_argument.strip().lower() == "yes":
@@ -576,7 +580,9 @@ def main():
 
         # Main argument session loop
         while time.time() / 60 < end_time:
-            user_input = st.text_area("User:", value="", key="user_input").strip().lower()
+
+            user_input = user_input_placeholder.text_area("User:", "").strip().lower()
+            # user_input = st.text_area("User:", value="", key="user_input").strip().lower() = the original
 
             if user_input.lower().strip() == "exit":
                 break
