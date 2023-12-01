@@ -563,25 +563,37 @@ def main():
     Clinic: "Is 'silly' not a matter of perspective?"
     ''')
 
-    start_argument = st.text_input("Would you like to start an argument? (yes/no): ")
-    if start_argument.strip().lower() == "yes":
-        argue_time = st.text_input("How many minutes would you like to argue? (enter the number of minutes): ")
+    # Sidebar for configuration
+    with st.sidebar:
+        st.write("Configure your argument session:")
+        start_argument = st.selectbox("Would you like to start an argument?", ["Yes", "No"])
+        if start_argument == "Yes":
+            argue_time = st.slider("How many minutes would you like to argue?", 1, 60)
+
+    start_time = 0
+    end_time = 0
+
+    if start_argument == "Yes":
         start_time = time.time() / 60
-        end_time = start_time + int(argue_time)  # Calculate the end time
+        end_time = start_time + argue_time
         st.write("\nThe Argument Clinic is open! What is your first argument? ")
         st.write("\n**(Note: you can type 'exit' to end the argument at any point you want.)\n")
-        while time.time() / 60 < end_time:
-            user_input = st.text_input("User: ").strip().lower()
-            response = parse_input(user_input)
-            if user_input.lower().strip() == "exit":
-                break
-            st.write(f"Clinic: {response}")  # Print the response
 
-            if time.time() / 60 >= end_time:
-                break
+    # Main argument session loop
+    while time.time() / 60 < end_time:
+        user_input = st.text_input("User: ").strip().lower()
 
-        st.write("The argument clinic session is over, Thanks for participating.\nHave a great day!")
+        if user_input.lower().strip() == "exit":
+            break
+
+        response = parse_input(user_input)
+        st.write(f"Clinic: {response}")
+
+        if time.time() / 60 >= end_time:
+            break
+
+    st.write("The argument clinic session is over. Thanks for participating!\nHave a great day!")
 
 
-if __name__ == "__main__":  # This block executes when the script is run as the main program.
+if __name__ == "__main__":
     main()
