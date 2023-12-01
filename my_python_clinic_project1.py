@@ -561,12 +561,10 @@ def main():
     User: "Yes, but it's still silly."
     Clinic: "Is 'silly' not a matter of perspective?"
     ''')
-    # Create a placeholder for the user input window
-    user_input_placeholder = st.empty()
-    # Clear the user input window at the beginning of each session
-    user_input_placeholder.text_area("User:", value="", key="user_input")
 
+    user_input_placeholder = st.empty()
     start_argument = st.text_input("Would you like to start an argument? (yes/no): ").strip().lower()
+
     if start_argument.strip().lower() == "yes":
         # User input for the duration of the argument
         argue_time = st.number_input("How many minutes would you like to argue? (enter the number of minutes): ", min_value=1, key="argue_time")
