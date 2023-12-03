@@ -380,10 +380,10 @@ def handle_dont_understand(user_input):
     otherwise None
     """
     responses = [
-        "Is understanding the same as agreeing?"
+        "Is understanding the same as agreeing?",
         "Ah, the classic 'you don't understand.' Enlighten me, what am I missing?",
         "I hear you. Help me understand better.",
-        "Understanding is subjective. Help me see it from your angle. What am I not getting?",
+        "Understanding is subjective. Help me see it from your angle. What am I not getting?"
     ]
     return random.choice(responses)
 
