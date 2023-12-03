@@ -565,25 +565,31 @@ def main():
 
     if start_argument == "Yes":
         argue_time_input = st.text_input("How many minutes would you like to argue?")
-        argue_time = int(argue_time_input)
-        end_time = time.time() / 60 + argue_time
+        try:
+            argue_time = int(argue_time_input)
+        except ValueError:
+            st.error("Please enter a valid numeric value for the argument duration.")
+            return
+        start_time = time.time() / 60
+        end_time = start_time + argue_time
 
-        st.write("The Argument Clinic is open! What is your first argument?")
-        st.write("**Note: You can type 'exit' to end the argument at any point you want.")
+        st.success(f"Argument clinic session will last for {argue_time} minutes. Type 'exit' to end the argument.")
 
         while time.time() / 60 < end_time:
             user_input = st.text_input("User:")
-            responses = parse_input(user_input)
+            submit_button = st.form_submit_button("Submit")
 
-            if user_input.lower().strip() == "exit":
+            if submit_button:
+                responses = parse_input(user_input)
+                st.write(f"Clinic: {responses}")
+
+            exit_button = st.form_submit_button("Exit")
+            if exit_button:
                 break
+        st.success("The argument clinic session is over. Thanks for participating."
+                   " Have a great day!")
 
-            st.write(f"Clinic: {responses}")
 
-            if time.time() / 60 >= end_time:
-                break
-
-        st.success("The argument clinic session is over. Thanks for participating. Have a great day!")
 main()
 
 # #    # Move widget creation outside the loop
