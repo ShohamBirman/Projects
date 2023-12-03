@@ -546,9 +546,6 @@ def handle_seeking_advice_pattern(user_input):
     ]
     return random.choice(responses)
 
-def argument_clinic(user_input):
-    response = parse_input(user_input)
-    return f"Clinic: {response}"
 
 # Function to handle the main argument session
 def main():
@@ -569,25 +566,26 @@ def main():
     if start_argument:
         # User input for the duration of the argument
         argue_time = st.number_input("How many minutes would you like to argue?", min_value=1, max_value=60, step=1)
-        end_time = time.time() + argue_time * 60  # Convert minutes to seconds
+        start_time = time.time() / 60
+        end_time = start_time + argue_time
 
         st.success(f"Argument clinic session will last for {argue_time} minutes. Type 'exit' to end the argument.")
-        user_input_key = "user_input"
-        submit_button_key = "submit_button"
 
+        user_input = st.text_area("User:")
+        submit_button = st.button("Submit")
+
+        if submit_button:
+            responses = parse_input(user_input)
+            st.write(f"Clinic: {response}")
         # Main argument session loop
-        while time.time() < end_time:
-            user_input = st.text_input("User:", key=user_input_key).strip().lower()
-            if st.button("Submit"):
-                if user_input.lower().strip() == "exit":
-                    break
-                # Generate a unique widget ID dynamically
-                st.text(argument_clinic(user_input))
+        while time.time() / 60 < end_time:
+            if st.button("Exit"):
+                break
 
             if time.time() >= end_time:
                 break
 
-        st.success("The argument clinic session is over, Thanks for participating.\nHave a great day!")
+        st.write("The argument clinic session is over, Thanks for participating.\nHave a great day!")
 
 
 if __name__ == "__main__":  # This block executes when the script is run as the main program.
