@@ -556,8 +556,9 @@ def main():
     Clinic: "Is 'silly' not a matter of perspective?"
     ''')
 
-    start_argument = st.button("Start Argument")
-    if start_argument:
+    start_argument = st.radio("Would you like to start an argument?", ("Yes", "No"))
+
+    if start_argument == "Yes":
         argue_time = st.text_input("Enter the number of minutes you'd like to argue:")
         try:
             argue_time = int(argue_time)
