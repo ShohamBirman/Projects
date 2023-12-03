@@ -565,7 +565,7 @@ def main():
 
     if start_argument:
         # User input for the duration of the argument
-        argue_time_input = st.text_input("How many minutes would you like to argue? (enter the number of minutes): ")
+        argue_time_input = st.text_input(f"How many minutes would you like to argue? (Enter the number of minutes): ")
         argue_time = int(argue_time_input)
         start_time = time.time() / 60
         end_time = start_time + argue_time
