@@ -586,8 +586,8 @@ def main():
                 if submit_button:
                     responses = parse_input(user_input)
                     st.write(f"Clinic: {responses}")
-                    # Clear the user input after processing
-                    user_input = ""
+                # Clear the user input after processing
+                user_input = ""
 
                 exit_button = st.form_submit_button("Exit")
                 if exit_button:
