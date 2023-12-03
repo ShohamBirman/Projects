@@ -573,19 +573,17 @@ def main():
 
         while time.time() / 60 < end_time:
             user_input = st.text_input("User:")
-            response = parse_input(user_input)
+            responses = parse_input(user_input)
 
             if user_input.lower().strip() == "exit":
                 break
 
-            st.write(f"Clinic: {response}")
+            st.write(f"Clinic: {responses}")
 
             if time.time() / 60 >= end_time:
                 break
 
         st.success("The argument clinic session is over. Thanks for participating. Have a great day!")
-
-
 main()
 
 # #    # Move widget creation outside the loop
