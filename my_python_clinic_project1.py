@@ -574,19 +574,18 @@ def main():
         end_time = start_time + argue_time
 
         st.success(f"Argument clinic session will last for {argue_time} minutes. Type 'exit' to end the argument.")
-
-        while time.time() / 60 < end_time:
+        with st.form(key='my_form'):
             user_input = st.chat_input("User:")
             submit_button = st.form_submit_button("Submit")
-
-            if submit_button:
-                responses = parse_input(user_input)
-                st.chat_message(f"Clinic: {responses}")
-            # Clear the user input after processing
-
-            exit_button = st.form_submit_button("Exit")
-            if exit_button:
-                break
+            while time.time() / 60 < end_time:
+                if submit_button:
+                    responses = parse_input(user_input)
+                    st.chat_message(f"Clinic: {responses}")
+                    # Clear the user input after processing
+                    user_input = ""
+                exit_button = st.form_submit_button("Exit")
+                if exit_button:
+                    break
     st.success("The argument clinic session is over. Thanks for participating."
                " Have a great day!")
 
