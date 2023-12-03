@@ -547,6 +547,15 @@ def handle_seeking_advice_pattern(user_input):
     return random.choice(responses)
 
 
+def initialize_argument_state():
+    if 'argument_state' not in st.session_state:
+        st.session_state.argument_state = {
+            'start_time': None,
+            'end_time': None,
+            'user_input': None
+        }
+
+
 def main():
     st.title('Welcome to the Python Argument Clinic!')
     st.write('''Here is a sample conversation to give you an idea of the interaction at the clinic:
@@ -558,13 +567,7 @@ def main():
     ''')
 
     # Initialize session state
-    if 'argument_state' not in st.session_state:
-        st.session_state.argument_state = {}
-
-    if not st.session_state.argument_state:
-        st.session_state.argument_state['start_time'] = None
-        st.session_state.argument_state['end_time'] = None
-        st.session_state.argument_state['user_input'] = None
+    initialize_argument_state()
 
     start_argument = st.radio("Would you like to start an argument?", ("Yes", "No"))
 
