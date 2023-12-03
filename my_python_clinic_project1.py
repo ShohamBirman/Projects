@@ -568,14 +568,16 @@ def main():
 
     if start_argument:
         # User input for the duration of the argument
-        argue_time = st.number_input("How many minutes would you like to argue?", min_value=1, step=1)
+        argue_time = st.number_input("How many minutes would you like to argue?", min_value=1, max_value=60, step=1)
         end_time = time.time() + argue_time * 60  # Convert minutes to seconds
 
         st.success(f"Argument clinic session will last for {argue_time} minutes. Type 'exit' to end the argument.")
+        user_input_key = "user_input"
+        submit_button_key = "submit_button"
 
         # Main argument session loop
         while time.time() < end_time:
-            user_input = st.text_input("User:").strip().lower()
+            user_input = st.text_input("User:", key=user_input_key).strip().lower()
             if st.button("Submit"):
                 if user_input.lower().strip() == "exit":
                     break
