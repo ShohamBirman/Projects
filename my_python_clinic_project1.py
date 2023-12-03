@@ -575,25 +575,23 @@ def main():
 
         st.success(f"Argument clinic session will last for {argue_time} minutes. Type 'exit' to end the argument.")
 
-        with st.form(key='my_form'):
-            #user_input_id = 0  # Initialize a variable to keep track of the user input IDs
-            #user_input = st.text_input(f"User:", key=f"user_input_{user_input_id}")  # Use the unique ID for the widget
-            #submit_button = st.form_submit_button("Submit")
-            while time.time() / 60 < end_time:
-                user_input = st.text_input("User:")
-                submit_button = st.form_submit_button("Submit")
 
-                if submit_button:
-                    responses = parse_input(user_input)
-                    st.write(f"Clinic: {responses}")
-                # Clear the user input after processing
-                user_input = ""
 
-                exit_button = st.form_submit_button("Exit")
-                if exit_button:
-                    break
-        st.success("The argument clinic session is over. Thanks for participating."
-                   " Have a great day!")
+        while time.time() / 60 < end_time:
+            user_input = st.text_input("User:")
+            submit_button = st.form_submit_button("Submit")
+
+            if submit_button:
+                responses = parse_input(user_input)
+                st.write(f"Clinic: {responses}")
+            # Clear the user input after processing
+            user_input = ""
+
+            exit_button = st.form_submit_button("Exit")
+            if exit_button:
+                break
+    st.success("The argument clinic session is over. Thanks for participating."
+               " Have a great day!")
 
 
 main()
