@@ -586,8 +586,7 @@ def main():
         st.success("The argument clinic session is over. Thanks for participating. Have a great day!")
 
 
-if __name__ == "__main__":
-    main()
+main()
 
 # #    # Move widget creation outside the loop
 # #    st.sidebar.subheader("Argument Settings")
