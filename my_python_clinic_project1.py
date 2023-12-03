@@ -564,46 +564,31 @@ def main():
     start_argument = st.radio("Would you like to start an argument?", ("Yes", "No"))
 
     if start_argument == "Yes":
-        argue_time_input = st.text_input("How many minutes would you like to argue?")
+        argue_time = st.text_input("Enter the number of minutes you'd like to argue:")
         try:
-            argue_time = int(argue_time_input)
+            argue_time = int(argue_time)
         except ValueError:
-            st.error("Please enter a valid numeric value for the argument duration.")
+            st.error("Please enter a valid number of minutes.")
             return
         start_time = time.time() / 60
         end_time = start_time + argue_time
-
         st.success(f"Argument clinic session will last for {argue_time} minutes. Type 'exit' to end the argument.")
+        user_input = st.text_input("User:")
 
-        user_input_responses_key = 'user_input_responses'
-        if user_input_responses_key not in st.session_state:
-            st.session_state[user_input_responses_key] = []
+        while time.time() / 60 < end_time:
+            if user_input.lower().strip() == "exit":
+                break
 
-        user_input_id = 0  # Initialize a variable to keep track of the user input IDs
+            response = parse_input(user_input)
+            st.write(f"Clinic: {response}")
 
-        with st.form(key='my_form'):
-            user_input = st.text_input(f"User:", key=f"user_input_{user_input_id}")  # Use the unique ID for the widget
+            user_input = st.text_input("User:")
 
-            submit_button = st.form_submit_button("Submit")
-            exit_button = st.form_submit_button("Exit")
+            if time.time() / 60 >= end_time:
+                break
 
-            while time.time() / 60 < end_time:
-                if submit_button:
-                    responses = parse_input(user_input)
-                    st.session_state[user_input_responses_key].append((user_input, responses))
-                    # Clear the user input after processing
-                    user_input = ""
-
-                if exit_button:
-                    break
-
-        # Display user input and clinic responses at the end
-        for user_input, responses in st.session_state[user_input_responses_key]:
-            st.write(f"User: {user_input}")
-            st.write(f"Clinic: {responses}")
-
-    st.success("The argument clinic session is over. Thanks for participating."
-               " Have a great day!")
+        st.success("The argument clinic session is over. Thanks for participating. "
+                   "Have a great day!")
 
 
 main()
