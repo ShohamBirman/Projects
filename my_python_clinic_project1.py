@@ -546,16 +546,6 @@ def handle_seeking_advice_pattern(user_input):
     ]
     return random.choice(responses)
 
-
-def initialize_argument_state():
-    if 'argument_state' not in st.session_state:
-        st.session_state.argument_state = {
-            'start_time': None,
-            'end_time': None,
-            'user_input': None
-        }
-
-
 def main():
     st.title('Welcome to the Python Argument Clinic!')
     st.write('''Here is a sample conversation to give you an idea of the interaction at the clinic:
@@ -566,9 +556,10 @@ def main():
     Clinic: "Is 'silly' not a matter of perspective?"
     ''')
 
-    start_argument = st.radio("Would you like to start an argument?", ["Yes", "No"])
+    st.text("Would you like to start an argument?")
+    start_argument = st.button("Yes")
 
-    if start_argument == "Yes":
+    if start_argument:
         argue_time = st.text_input("Enter the number of minutes you'd like to argue:")
         try:
             argue_time = int(argue_time)
@@ -580,12 +571,15 @@ def main():
             st.text("What is your first argument?")
 
             user_input = st.text_input("User:")
-            if st.button("Submit"):
-                while time.time()/60 < end_time:
-                    if st.button("Exit"):
-                        argument_over = True
-                        break
+            submit_button = st.button("Submit")
 
+            while time.time()/60 < end_time and not argument_over:
+                exit_button = st.button("Exit")
+
+                if exit_button:
+                    argument_over = True
+
+                if submit_button:
                     if user_input:
                         responses = parse_input(user_input)
                         st.text(f"Clinic: {responses}")  # Display the response
@@ -594,8 +588,8 @@ def main():
                         st.warning("Please enter your response.")
                         break  # Break the loop if no user input
 
-                if argument_over:
-                    st.text("The argument clinic session is over. Thanks for participating.\nHave a great day!")
+            if argument_over:
+                st.text("The argument clinic session is over. Thanks for participating.\nHave a great day!")
 
         except ValueError:
             st.error("Please enter a valid number of minutes.")
