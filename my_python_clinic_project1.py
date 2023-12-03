@@ -595,4 +595,4 @@ def main():
 
 
 #if __name__ == "__main__":  # This block executes when the script is run as the main program.
-main()
+print(main())
