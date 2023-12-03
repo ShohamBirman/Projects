@@ -578,5 +578,5 @@ def main():
 
         st.success("The argument clinic session is over. Thanks for participating. Have a great day!")
 
-if __name__ == "__main__":  # This block executes when the script is run as the main program.
-    main()
+#if __name__ == "__main__":  # This block executes when the script is run as the main program.
+main()
