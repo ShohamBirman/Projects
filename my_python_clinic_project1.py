@@ -549,17 +549,31 @@ def handle_seeking_advice_pattern(user_input):
 
 # Function to handle the main argument session
 def main():
+    """
+    Main function to run the argument clinic session.
+    """
     st.title('Welcome to the Python Argument Clinic!')
+    st.write(f'''Here is a sample conversation to give you an idea of the interaction at the clinic:
 
-    argue_time_input = st.text_input("How many minutes would you like to argue? (Enter the number of minutes): ")
+    User: "I think this is silly."
+    Clinic: "Have you considered the opposite?"
+    User: "Yes, but it's still silly."
+    Clinic: "Is 'silly' not a matter of perspective?"
+    ''')
 
-    if st.button("Start Argument"):
-        try:
-            argue_time = int(argue_time_input)
-        except ValueError:
-            st.error("Please enter a valid numeric value for the argument duration.")
-            return
+    st.sidebar.subheader("Argument Settings")
+    argue_time_input = st.sidebar.text_input(
+        "How many minutes would you like to argue? (Enter the number of minutes): ")
 
+    try:
+        argue_time = int(argue_time_input)
+    except ValueError:
+        st.sidebar.error("Please enter a valid numeric value for the argument duration.")
+        return
+
+    start_argument = st.sidebar.button("Start Argument")
+
+    if start_argument:
         st.success(f"Argument clinic session will last for {argue_time} minutes. Type 'exit' to end the argument.")
 
         start_time = time.time() / 60
@@ -570,13 +584,15 @@ def main():
             submit_button = st.button("Submit")
 
             if submit_button:
-                st.write(f"Clinic: Responding to '{user_input}'")
+                responses = parse_input(user_input)
+                st.write(f"Clinic: {responses}")
 
             exit_button = st.button("Exit")
             if exit_button:
                 break
 
         st.success("The argument clinic session is over. Thanks for participating. Have a great day!")
+
 
 #if __name__ == "__main__":  # This block executes when the script is run as the main program.
 main()
