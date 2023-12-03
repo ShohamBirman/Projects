@@ -571,16 +571,17 @@ def main():
 
         st.success(f"Argument clinic session will last for {argue_time} minutes. Type 'exit' to end the argument.")
 
-        while time.time()/60 < end_time:
-            user_input = st.text_input("User:")
-            if user_input.lower().strip() == "exit":
-                break
+        with st.form("argument_form"):
+            while time.time() / 60 < end_time:
+                user_input = st.text_input("User:")
+                if st.form_submit_button("Submit") or user_input.lower().strip() == "exit":
+                    break
 
-            response = parse_input(user_input)
-            st.write(f"Clinic: {response}")
+                response = parse_input(user_input)
+                st.write(f"Clinic: {response}")
 
-            if time.time()/60 >= end_time:
-                break
+                if time.time() / 60 >= end_time:
+                    break
 
         st.write("The argument clinic session is over. Thanks for participating. Have a great day!")
 
