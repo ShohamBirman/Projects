@@ -556,15 +556,6 @@ def initialize_argument_state():
         }
 
 
-def initialize_argument_state():
-    if 'argument_state' not in st.session_state:
-        st.session_state.argument_state = {
-            'start_time': None,
-            'end_time': None,
-            'user_input': None
-        }
-
-
 def main():
     st.title('Welcome to the Python Argument Clinic!')
     st.write('''Here is a sample conversation to give you an idea of the interaction at the clinic:
