@@ -556,6 +556,15 @@ def initialize_argument_state():
         }
 
 
+def initialize_argument_state():
+    if 'argument_state' not in st.session_state:
+        st.session_state.argument_state = {
+            'start_time': None,
+            'end_time': None,
+            'user_input': None
+        }
+
+
 def main():
     st.title('Welcome to the Python Argument Clinic!')
     st.write('''Here is a sample conversation to give you an idea of the interaction at the clinic:
@@ -605,7 +614,8 @@ def main():
         st.success("The argument clinic session is over. Thanks for participating. Have a great day!")
 
 
-main()
+if __name__ == "__main__":
+    main()
 # Function to handle the main argument session
 # def main():
 #     """
