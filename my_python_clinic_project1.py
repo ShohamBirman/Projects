@@ -576,10 +576,10 @@ def main():
         st.success(f"Argument clinic session will last for {argue_time} minutes. Type 'exit' to end the argument.")
 
         with st.form(key='my_form'):
-            user_input_id = 0  # Initialize a variable to keep track of the user input IDs
+            # user_input_id = 0  # Initialize a variable to keep track of the user input IDs
             while time.time() / 60 < end_time:
-                user_input_id += 1  # Increment the user input ID
-                user_input = st.text_input("User:", key=f"user_input_{user_input_id}")  # Use the unique ID for the widget
+                #user_input_id += 1  # Increment the user input ID
+                user_input = st.text_input("User:")
                 submit_button = st.form_submit_button("Submit")
 
                 if submit_button:
