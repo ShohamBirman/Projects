@@ -580,19 +580,17 @@ def main():
 
             user_input = st.text_input("User:")
             if st.button("Submit"):
-            while time.time()/60 < end_time:
-                if st.button("Exit"):
-                    break
+                while time.time()/60 < end_time:
+                    if st.button("Exit"):
+                        break
 
-                if user_input:
-                    responses = parse_input(user_input)
-                    st.text(f"Clinic: {responses}")  # Display the response
-                    user_input = ""  # Empty the user input for the next response
-                else:
-                    st.warning("Please enter your response.")
-                    break  # Break the loop if no user input
-
-
+                    if user_input:
+                        responses = parse_input(user_input)
+                        st.text(f"Clinic: {responses}")  # Display the response
+                        user_input = ""  # Empty the user input for the next response
+                    else:
+                        st.warning("Please enter your response.")
+                        break  # Break the loop if no user input
         except ValueError:
             st.error("Please enter a valid number of minutes.")
         st.success("The argument clinic session is over. Thanks for participating. Have a great day!")
