@@ -554,7 +554,6 @@ def main():
     """
     st.title('Welcome to the Python Argument Clinic!')
     st.write(f'''Here is a sample conversation to give you an idea of the interaction at the clinic:
-
     User: "I think this is silly."
     Clinic: "Have you considered the opposite?"
     User: "Yes, but it's still silly."
