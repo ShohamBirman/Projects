@@ -570,9 +570,10 @@ def main():
         end_time = start_time + argue_time  # Calculate the end time
         st.success(f"Argument clinic session will last for {argue_time} minutes. Type 'exit' to end the argument.")
 
+        unique_identifier = 0  # Initialize the unique identifier
 
         while time.time()/60 < end_time:
-            user_input = st.text_input("User:")
+            user_input = st.text_input(f"User {unique_identifier}:")
 
             if user_input.lower().strip() == "exit":
                 break
@@ -582,7 +583,7 @@ def main():
 
             if time.time()/60 >= end_time:
                 break
-
+            unique_identifier += 1  # Increment the unique identifier for the next iteration
         st.write("The argument clinic session is over. Thanks for participating. Have a great day!")
 
 
