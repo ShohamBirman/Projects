@@ -582,7 +582,8 @@ def main():
 
             if time.time()/60 >= end_time:
                 break
-        st.write("The argument clinic session is over. Thanks for participating. Have a great day!🙏🙂")
+        st.write("The argument clinic session is over. Thanks for participating. "
+                 "Have a great day!🙏🙂")
 
 
 if __name__ == "__main__":
