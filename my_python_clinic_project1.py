@@ -559,11 +559,12 @@ def main():
 
     # Initialize session state
     if 'argument_state' not in st.session_state:
-        st.session_state.argument_state = {
-            'start_time': None,
-            'end_time': None,
-            'user_input': None
-        }
+        st.session_state.argument_state = {}
+
+    if not st.session_state.argument_state:
+        st.session_state.argument_state['start_time'] = None
+        st.session_state.argument_state['end_time'] = None
+        st.session_state.argument_state['user_input'] = None
 
     start_argument = st.radio("Would you like to start an argument?", ("Yes", "No"))
 
@@ -576,26 +577,26 @@ def main():
             return
 
         # Initialize or reset session state
-        st.session_state.argument_state.start_time = time.time() / 60
-        st.session_state.argument_state.end_time = st.session_state.argument_state.start_time + argue_time
-        st.session_state.argument_state.user_input = None
+        st.session_state.argument_state['start_time'] = time.time() / 60
+        st.session_state.argument_state['end_time'] = st.session_state.argument_state['start_time'] + argue_time
+        st.session_state.argument_state['user_input'] = None
 
         st.success(f"Argument clinic session will last for {argue_time} minutes. Type 'exit' to end the argument.")
 
         # Create a container for displaying the conversation
         conversation_container = st.empty()
 
-        while time.time() / 60 < st.session_state.argument_state.end_time:
-            if st.session_state.argument_state.user_input.lower().strip() == "exit":
+        while time.time() / 60 < st.session_state.argument_state['end_time']:
+            if st.session_state.argument_state['user_input'].lower().strip() == "exit":
                 break
 
-            response = parse_input(st.session_state.argument_state.user_input)
+            response = parse_input(st.session_state.argument_state['user_input'])
             conversation_container.write(f"Clinic: {response}")
 
             # Update user input in session state
-            st.session_state.argument_state.user_input = st.text_input("User:")
+            st.session_state.argument_state['user_input'] = st.text_input("User:")
 
-            if time.time() / 60 >= st.session_state.argument_state.end_time:
+            if time.time() / 60 >= st.session_state.argument_state['end_time']:
                 break
 
         st.success("The argument clinic session is over. Thanks for participating. Have a great day!")
