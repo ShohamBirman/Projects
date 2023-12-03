@@ -558,10 +558,18 @@ def main():
 
     start_argument = st.button("Start Argument")
     if start_argument:
-        argue_time = st.slider("How many minutes would you like to argue?", 1, 60)
-        end_time = time.time() + argue_time * 60
+        argue_time = st.text_input("Enter the number of minutes you'd like to argue:")
+        try:
+            argue_time = int(argue_time)
+        except ValueError:
+            st.error("Please enter a valid number of minutes.")
+            return
 
-        st.write("The Argument Clinic is open! Type 'exit' to end the argument.")
+        start_time = time.time() / 60
+        end_time = start_time + argue_time  # Calculate the end time
+
+        st.success(f"Argument clinic session will last for {argue_time} minutes. Type 'exit' to end the argument.")
+
         while time.time() < end_time:
             user_input = st.text_input("User:")
             if user_input.lower().strip() == "exit":
@@ -569,6 +577,7 @@ def main():
 
             response = parse_input(user_input)
             st.write(f"Clinic: {response}")
+            user_input = ""
 
             if time.time() >= end_time:
                 break
