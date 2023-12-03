@@ -574,11 +574,11 @@ def main():
         with st.form("argument_form"):
             while time.time() / 60 < end_time:
                 user_input = st.text_input("User:")
-                if st.form_submit_button("Submit") or user_input.lower().strip() == "exit":
+                if user_input.lower().strip() == "exit":
                     break
-                if user_input:
-                    response = parse_input(user_input)
-                    st.write(f"Clinic: {response}")
+
+                response = parse_input(user_input)
+                st.write(f"Clinic: {response}")
 
                 if time.time() / 60 >= end_time:
                     break
