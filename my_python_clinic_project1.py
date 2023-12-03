@@ -561,14 +561,9 @@ def main():
     ''')
     # Move widget creation outside the loop
     st.sidebar.subheader("Argument Settings")
-
-    #argue_time_input = st.sidebar.text_input(
-    #    "How many minutes would you like to argue? (Enter the number of minutes): ")
-
-    # Use st.form for a more structured form submission
-    with st.sidebar.form("argument_form"):
-        argue_time_input = st.text_input("How many minutes would you like to argue? (Enter the number of minutes): ")
-        start_argument = st.form_submit_button("Start Argument")
+    argue_time_input = st.sidebar.text_input(
+        "How many minutes would you like to argue? (Enter the number of minutes): ")
+    start_argument = st.sidebar.form_submit_button("Start Argument")
 
     # Validate input before proceeding
     try:
@@ -577,8 +572,6 @@ def main():
         st.sidebar.error("Please enter a valid numeric value for the argument duration.")
         return
 
-    start_argument = st.sidebar.button("Start Argument")
-
     if start_argument:
         st.success(f"Argument clinic session will last for {argue_time} minutes. Type 'exit' to end the argument.")
         start_time = time.time() / 60
@@ -586,18 +579,17 @@ def main():
 
         while time.time() / 60 < end_time:
             user_input = st.text_input("User:")
-            submit_button = st.button("Submit")
+            submit_button = st.form_submit_button("Submit")
 
             if submit_button:
                 responses = parse_input(user_input)
                 st.write(f"Clinic: {responses}")
 
-            exit_button = st.button("Exit")
+            exit_button = st.form_submit_button("Exit")
             if exit_button:
                 break
 
         st.success("The argument clinic session is over. Thanks for participating. Have a great day!")
 
-
 #if __name__ == "__main__":  # This block executes when the script is run as the main program.
-print(main())
+main()
