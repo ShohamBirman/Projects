@@ -589,7 +589,7 @@ def main():
                 else:
                     st.warning("Please enter your response.")
 
-            st.success("The argument clinic session is over. Thanks for participating. Have a great day!")
+        st.success("The argument clinic session is over. Thanks for participating. Have a great day!")
 
         except ValueError:
             st.error("Please enter a valid number of minutes.")
