@@ -547,7 +547,7 @@ def handle_seeking_advice_pattern(user_input):
     return random.choice(responses)
 
 def main():
-    st.title('Welcome to the Python Argument Clinic!')
+    st.title('Welcome to the Python Argument Clinic!👋')
     st.write('''Here is a sample conversation to give you an idea of the interaction at the clinic:
 
     User: "I think this is silly."
