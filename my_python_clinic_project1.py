@@ -577,7 +577,7 @@ def main():
 
         if submit_button:
             responses = parse_input(user_input)
-            st.write(f"Clinic: {response}")
+            st.write(f"Clinic: {responses}")
         # Main argument session loop
         while time.time() / 60 < end_time:
             if st.button("Exit"):
