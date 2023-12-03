@@ -572,27 +572,30 @@ def main():
         argue_time = st.text_input("Enter the number of minutes you'd like to argue:")
         try:
             argue_time = int(argue_time)
-            start_time = time.time() / 60
-            end_time = start_time + argue_time * 60  # Calculate the end time
+            start_time = time.time()/60
+            end_time = start_time + argue_time   # Calculate the end time
 
-            st.text("The Argument Clinic is open! What is your first argument?")
+            st.text(f"Argument clinic session will last for {argue_time} minutes. Type 'exit' to end the argument.")
+            st.text("What is your first argument?")
 
             user_input = st.text_input("User:")
-            while time.time() < end_time:
+            if st.button("Submit"):
+            while time.time()/60 < end_time:
                 if st.button("Exit"):
                     break
 
                 if user_input:
-                    response = parse_input(user_input)
-                    st.text(f"Clinic: {response}")  # Display the response
+                    responses = parse_input(user_input)
+                    st.text(f"Clinic: {responses}")  # Display the response
                     user_input = ""  # Empty the user input for the next response
                 else:
                     st.warning("Please enter your response.")
+                    break  # Break the loop if no user input
 
-        st.success("The argument clinic session is over. Thanks for participating. Have a great day!")
 
         except ValueError:
             st.error("Please enter a valid number of minutes.")
+        st.success("The argument clinic session is over. Thanks for participating. Have a great day!")
 
 
 if __name__ == "__main__":
