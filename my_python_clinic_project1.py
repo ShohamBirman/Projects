@@ -583,20 +583,20 @@ def main():
         if submit_button:
             responses = parse_input(user_input)
             st.write(f"Clinic: {responses}")
-        # Main argument session loop
-        while time.time() / 60 < end_time:
-            if st.button("Exit"):
-                break
 
-            if time.time() >= end_time:
-                break
+            # Check if the argument session has started
+        if time.time() / 60 < end_time:
+            exit_button = st.button("Exit")
 
-            user_input = st.text_input("User:")
-            submit_button = st.button("Submit")
+            while not exit_button and time.time() / 60 < end_time:
+                user_input = st.text_input("User:")
+                submit_button = st.button("Submit")
 
-            if submit_button:
-                responses = parse_input(user_input)
-                st.write(f"Clinic: {responses}")
+                if submit_button:
+                    responses = parse_input(user_input)
+                    st.write(f"Clinic: {responses}")
+
+               exit_button = st.button("Exit")
 
         st.success("The argument clinic session is over, Thanks for participating.\n"
                    "Have a great day!")
