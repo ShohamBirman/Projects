@@ -563,36 +563,34 @@ def main():
         argue_time = st.text_input("Enter the number of minutes you'd like to argue:")
         try:
             argue_time = int(argue_time)
-            start_time = time.time()/60
-            end_time = start_time + argue_time   # Calculate the end time
-            argument_over = False  # Flag to indicate if the argument is over
-
-            st.text(f"Argument clinic session will last for {argue_time} minutes. Type 'exit' to end the argument.")
-            st.text("What is your first argument?")
-
-            user_input = st.text_input("User:")
-            submit_button = st.button("Submit")
-
-            while time.time()/60 < end_time and not argument_over:
-                exit_button = st.button("Exit")
-
-                if exit_button:
-                    argument_over = True
-
-                if submit_button:
-                    if user_input:
-                        responses = parse_input(user_input)
-                        st.text(f"Clinic: {responses}")  # Display the response
-                        user_input = ""  # Empty the user input for the next response
-                    else:
-                        st.warning("Please enter your response.")
-                        break  # Break the loop if no user input
-
-            if argument_over:
-                st.text("The argument clinic session is over. Thanks for participating.\nHave a great day!")
-
         except ValueError:
             st.error("Please enter a valid number of minutes.")
+            return
+        start_time = time.time()/60
+        end_time = start_time + argue_time   # Calculate the end time
+
+        st.success(f"Argument clinic session will last for {argue_time} minutes. Type 'exit' to end the argument.")
+        st.success("What is your first argument?")
+
+        user_input = st.text_input("User:")
+        submit_button = st.button("Submit")
+
+        while time.time()/60 < end_time and not argument_over:
+            exit_button = st.button("Exit")
+            if exit_button:
+                break
+
+            if submit_button:
+                if user_input:
+                    responses = parse_input(user_input)
+                    st.text(f"Clinic: {responses}")  # Display the response
+                    user_input = ""  # Empty the user input for the next response
+                else:
+                    st.warning("Please enter your response.")
+                    break  # Break the loop if no user input
+
+        st.success("The argument clinic session is over. Thanks for participating.\nHave a great day!")
+
 
 if __name__ == "__main__":
     main()
