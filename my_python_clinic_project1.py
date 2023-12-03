@@ -573,11 +573,11 @@ def main():
 
         while time.time() / 60 < end_time:
             user_input = st.text_input("User:")
-            response = parse_input(user_input)
-            st.write(f"Clinic: {response}")
 
             if user_input.lower().strip() == "exit":
                 break
+            responses = parse_input(user_input)
+            st.write(f"Clinic: {responses}")
 
             if time.time() / 60 >= end_time:
                 break
