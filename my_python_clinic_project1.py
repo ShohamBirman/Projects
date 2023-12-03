@@ -565,41 +565,37 @@ def main():
 
     if start_argument:
         # User input for the duration of the argument
-        argue_time_input = st.text_input(f"How many minutes would you like to argue? (Enter the number of minutes): ")
-        try:
-            argue_time = int(argue_time_input)
-        except ValueError:
-            st.error("Please enter a valid numeric value for the argument duration.")
-            return
+        with st.form("argument_form"):
+            argue_time_input = st.text_input(f"How many minutes would you like to argue? (Enter the number of minutes): ")
 
-        start_time = time.time() / 60
-        end_time = start_time + argue_time
+            try:
+                argue_time = int(argue_time_input)
+            except ValueError:
+                st.error("Please enter a valid numeric value for the argument duration.")
+                return
 
-        st.success(f"Argument clinic session will last for {argue_time} minutes. Type 'exit' to end the argument.")
+            submit_button = st.form_submit_button("Submit")
 
-        user_input = st.text_input("User:")
-        submit_button = st.button("Submit")
+            if submit_button:
+                st.success(
+                    f"Argument clinic session will last for {argue_time} minutes. Type 'exit' to end the argument.")
 
-        if submit_button:
-            responses = parse_input(user_input)
-            st.write(f"Clinic: {responses}")
+                start_time = time.time() / 60
+                end_time = start_time + argue_time
 
-            # Check if the argument session has started
-        if time.time() / 60 < end_time:
-            exit_button = st.button("Exit")
+                while time.time() / 60 < end_time:
+                    user_input = st.text_input("User:")
+                    submit_button = st.button("Submit")
 
-            while not exit_button and time.time() / 60 < end_time:
-                user_input = st.text_input("User:")
-                submit_button = st.button("Submit")
+                    if submit_button:
+                        responses = parse_input(user_input)
+                        st.write(f"Clinic: {responses}")
 
-                if submit_button:
-                    responses = parse_input(user_input)
-                    st.write(f"Clinic: {responses}")
+                    exit_button = st.button("Exit")
+                    if exit_button:
+                        break
 
-               exit_button = st.button("Exit")
-
-        st.success("The argument clinic session is over, Thanks for participating.\n"
-                   "Have a great day!")
+                st.success("The argument clinic session is over. Thanks for participating. Have a great day!")
 
 
 if __name__ == "__main__":  # This block executes when the script is run as the main program.
