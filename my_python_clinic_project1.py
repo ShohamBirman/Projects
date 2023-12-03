@@ -547,19 +547,23 @@ def handle_seeking_advice_pattern(user_input):
     return random.choice(responses)
 
 
-# Function to handle the main argument session
 def main():
-    """
-    Main function to run the argument clinic session.
-    """
     st.title('Welcome to the Python Argument Clinic!')
-    st.write(f'''Here is a sample conversation to give you an idea of the interaction at the clinic:
-    
+    st.write('''Here is a sample conversation to give you an idea of the interaction at the clinic:
+
     User: "I think this is silly."
     Clinic: "Have you considered the opposite?"
     User: "Yes, but it's still silly."
     Clinic: "Is 'silly' not a matter of perspective?"
     ''')
+
+    # Initialize session state
+    if 'argument_state' not in st.session_state:
+        st.session_state.argument_state = {
+            'start_time': None,
+            'end_time': None,
+            'user_input': None
+        }
 
     start_argument = st.radio("Would you like to start an argument?", ("Yes", "No"))
 
@@ -570,25 +574,76 @@ def main():
         except ValueError:
             st.error("Please enter a valid number of minutes.")
             return
-        start_time = time.time() / 60
-        end_time = start_time + argue_time
+
+        # Initialize or reset session state
+        st.session_state.argument_state.start_time = time.time() / 60
+        st.session_state.argument_state.end_time = st.session_state.argument_state.start_time + argue_time
+        st.session_state.argument_state.user_input = None
+
         st.success(f"Argument clinic session will last for {argue_time} minutes. Type 'exit' to end the argument.")
-        user_input = st.text_input("User:")
 
-        while time.time() / 60 < end_time:
-            if user_input.lower().strip() == "exit":
+        # Create a container for displaying the conversation
+        conversation_container = st.empty()
+
+        while time.time() / 60 < st.session_state.argument_state.end_time:
+            if st.session_state.argument_state.user_input.lower().strip() == "exit":
                 break
 
-            response = parse_input(user_input)
-            st.write(f"Clinic: {response}")
+            response = parse_input(st.session_state.argument_state.user_input)
+            conversation_container.write(f"Clinic: {response}")
 
-            user_input = st.text_input("User:")
+            # Update user input in session state
+            st.session_state.argument_state.user_input = st.text_input("User:")
 
-            if time.time() / 60 >= end_time:
+            if time.time() / 60 >= st.session_state.argument_state.end_time:
                 break
 
-        st.success("The argument clinic session is over. Thanks for participating. "
-                   "Have a great day!")
+        st.success("The argument clinic session is over. Thanks for participating. Have a great day!")
 
 
 main()
+# Function to handle the main argument session
+# def main():
+#     """
+#     Main function to run the argument clinic session.
+#     """
+#     st.title('Welcome to the Python Argument Clinic!')
+#     st.write(f'''Here is a sample conversation to give you an idea of the interaction at the clinic:
+#
+#     User: "I think this is silly."
+#     Clinic: "Have you considered the opposite?"
+#     User: "Yes, but it's still silly."
+#     Clinic: "Is 'silly' not a matter of perspective?"
+#     ''')
+#
+#     start_argument = st.radio("Would you like to start an argument?", ("Yes", "No"))
+#
+#     if start_argument == "Yes":
+#         argue_time = st.text_input("Enter the number of minutes you'd like to argue:")
+#         try:
+#             argue_time = int(argue_time)
+#         except ValueError:
+#             st.error("Please enter a valid number of minutes.")
+#             return
+#         start_time = time.time() / 60
+#         end_time = start_time + argue_time
+#         st.success(f"Argument clinic session will last for {argue_time} minutes. Type 'exit' to end the argument.")
+#         user_input = st.text_input("User:")
+#
+#         while time.time() / 60 < end_time:
+#             if user_input.lower().strip() == "exit":
+#                 break
+#
+#             response = parse_input(user_input)
+#             st.write(f"Clinic: {response}")
+#
+#             user_input = st.text_input("User:")
+#
+#             if time.time() / 60 >= end_time:
+#                 break
+#
+#         st.success("The argument clinic session is over. Thanks for participating. "
+#                    "Have a great day!")
+#
+#
+# main()
