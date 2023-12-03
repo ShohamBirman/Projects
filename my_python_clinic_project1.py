@@ -556,7 +556,7 @@ def main():
     Clinic: "Is 'silly' not a matter of perspective?"
     ''')
 
-    st.text("Would you like to start an argument?")
+    st.write("Would you like to start an argument?")
     start_argument = st.button("Yes")
 
     if start_argument:
