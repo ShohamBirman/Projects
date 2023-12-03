@@ -565,13 +565,13 @@ def main():
 
     if start_argument:
         # User input for the duration of the argument
-        argue_time = st.number_input("How many minutes would you like to argue?", min_value=1, max_value=60, step=1)
+        argue_time = int(st.text_input("How many minutes would you like to argue?"))
         start_time = time.time() / 60
         end_time = start_time + argue_time
 
         st.success(f"Argument clinic session will last for {argue_time} minutes. Type 'exit' to end the argument.")
 
-        user_input = st.text_area("User:")
+        user_input = st.text_input("User:")
         submit_button = st.button("Submit")
 
         if submit_button:
@@ -585,7 +585,8 @@ def main():
             if time.time() >= end_time:
                 break
 
-        st.write("The argument clinic session is over, Thanks for participating.\nHave a great day!")
+        st.success("The argument clinic session is over, Thanks for participating.\n"
+                   "Have a great day!")
 
 
 if __name__ == "__main__":  # This block executes when the script is run as the main program.
