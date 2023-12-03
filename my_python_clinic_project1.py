@@ -575,7 +575,7 @@ def main():
         user_input = st.text_input("User:")
         submit_button = st.button("Submit")
 
-        while time.time()/60 < end_time and not argument_over:
+        while time.time()/60 < end_time:
             exit_button = st.button("Exit")
             if exit_button:
                 break
