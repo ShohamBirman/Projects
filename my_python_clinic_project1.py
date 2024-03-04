@@ -119,7 +119,7 @@ def handle_negation(user_input):
     Returns:
     - str: A randomly chosen response from a predefined set
     """
-    
+
     responses = [
         "I hear you, but have you considered the alternative?",
         "Sometimes a 'no' is just a 'yes' waiting to be discovered. What do you think?",
