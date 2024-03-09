@@ -568,7 +568,7 @@ def main():
 
         start_time = time.time()/60
         end_time = start_time + argue_time  # Calculate the end time
-        st.success(f"Argument clinic session will last for {argue_time} minutes. Type 'exit' to end the argument.")
+        st.success(f"Argument clinic session will last for {argue_time} minutes.")
 
         user_input = st.text_input("User:")
         submit_button = st.button("Submit")
