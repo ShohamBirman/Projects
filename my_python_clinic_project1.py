@@ -570,35 +570,32 @@ def main():
         end_time = start_time + argue_time  # Calculate the end time
         st.success(f"Argument clinic session will last for {argue_time} minutes. Type 'exit' to end the argument.")
 
-        with st.form(key='argument_form'):
-            user_input = st.text_input("User:")
-            submit_button = st.form_submit_button("Submit")
+        user_input = st.text_input("User:")
+        submit_button = st.button("Submit")
+        exit_button = st.button("Exit")
 
-            while time.time() / 60 < end_time and not submit_button:
-                if user_input.lower().strip() == "exit":
-                    break
+        if exit_button:
+            st.write("The argument clinic session is over. Thanks for participating. Have a great day!🙏🙂")
+            return
 
-                if user_input:
-                    st.write(f"Clinic: {parse_input(user_input)}")
+        if submit_button and user_input.strip():
+            response = parse_input(user_input)
+            st.write(f"Clinic: {response}")
 
-                if time.time() / 60 >= end_time:
-                    break
+        #while time.time()/60 < end_time:
+         #   user_input = st.text_input("User:")
 
-                user_input = st.text_input("User:")
-      #  while time.time()/60 < end_time:
-       #     user_input = st.text_input("User:")
+          #  if user_input.lower().strip() == "exit":
+           #     break
 
-        #    if user_input.lower().strip() == "exit":
-         #       break
-
-          #  if user_input:
-           #     response = parse_input(user_input)
-            #    st.write(f"Clinic: {response}")
+           # if user_input:
+            #    response = parse_input(user_input)
+             #   st.write(f"Clinic: {response}")
 
            # if time.time()/60 >= end_time:
             #    break
 
-        st.write("The argument clinic session is over. Thanks for participating. Have a great day!🙏🙂")
+       # st.write("The argument clinic session is over. Thanks for participating. Have a great day!🙏🙂")
 
 
 if __name__ == "__main__":
