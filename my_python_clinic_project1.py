@@ -570,8 +570,10 @@ def main():
         end_time = start_time + argue_time  # Calculate the end time
         st.success(f"Argument clinic session will last for {argue_time} minutes. Type 'exit' to end the argument.")
 
+        widget_counter = 0  # Counter for generating unique widget IDs
+
         while time.time()/60 < end_time:
-            user_input_widget_id = f"user_input_{argue_time}"
+            user_input_widget_id = f"user_input_{widget_counter}"
             user_input = st.text_input("User:", key=user_input_widget_id)
 
             if user_input.lower().strip() == "exit":
@@ -583,6 +585,9 @@ def main():
 
             if time.time()/60 >= end_time:
                 break
+
+            widget_counter += 1
+            
         st.write("The argument clinic session is over. Thanks for participating. Have a great day!🙏🙂")
 
 
