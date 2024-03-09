@@ -570,14 +570,17 @@ def main():
         end_time = start_time + argue_time  # Calculate the end time
         st.success(f"Argument clinic session will last for {argue_time} minutes. Type 'exit' to end the argument.")
 
+        user_input_widget_id = "user_input"
+
         while time.time()/60 < end_time:
-            user_input = st.chat_input("User:")
+            user_input = st.chat_input("User:", key=user_input_widget_id)
 
             if user_input.lower().strip() == "exit":
                 break
 
             if user_input:
-                st.write(f"Clinic: {parse_input(user_input)}")
+                response = parse_input(user_input)
+                st.write(f"Clinic: {response}")
 
             if time.time()/60 >= end_time:
                 break
