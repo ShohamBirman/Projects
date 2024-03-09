@@ -579,8 +579,8 @@ def main():
                 break
 
             if user_input:
-                response = parse_input(user_input)
-                st.write(f"Clinic: {response}")
+                #response = parse_input(user_input)
+                st.write(f"Clinic: {parse_input(user_input)}")
 
             if time.time()/60 >= end_time:
                 break
