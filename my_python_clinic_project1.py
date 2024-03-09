@@ -546,7 +546,6 @@ def handle_seeking_advice_pattern(user_input):
         "I'm here to help. What specific advice or insights are you looking for in this situation?"
     ]
     return random.choice(responses)
-text_input_count = 0
 def main():
     st.title('Welcome to the Python Argument Clinic!👋')
     st.write('''Here is a sample conversation to give you an idea of the interaction at the clinic:
@@ -571,11 +570,11 @@ def main():
         end_time = start_time + argue_time  # Calculate the end time
         st.success(f"Argument clinic session will last for {argue_time} minutes. Type 'exit' to end the argument.")
 
+        user_input_widget_id = "user_input"
 
         while time.time()/60 < end_time:
-            global text_input_count
-            text_input_count += 1
-            user_input = st.text_input(f"User {text_input_count}:", key=f"user_input_{text_input_count}")
+            user_input = st.text_input("User:", key=user_input_widget_id)
+
             if user_input.lower().strip() == "exit":
                 break
 
