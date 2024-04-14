@@ -5,17 +5,20 @@ import torch.optim as optim
 import torchvision
 from torch.utils.data import DataLoader
 from torchvision import datasets, transforms, models
-import zipfile
 from PIL import Image
+from sklearn.metrics import recall_score, accuracy_score
+import zipfile
 import streamlit as st
 
 # Extract the dataset zip file
-with zipfile.ZipFile("C:\\Users\\shoha\\OneDrive\\מסמכים\\GitHub\\Projects\\final_project_melanoma_detection\\archive.zip", "r") as zip_ref:
+with zipfile.ZipFile(
+        "C:\\Users\\shoha\\OneDrive\\מסמכים\\GitHub\\Projects\\final_project_melanoma_detection\\archive.zip",
+        "r") as zip_ref:
     zip_ref.extractall("extracted_dataset")
 
 # Define transforms for data preprocessing
 transform = transforms.Compose([
-    transforms.Resize((224, 224)),
+    transforms.Resize((112, 112)),  # Resize images to 112x112
     transforms.ToTensor(),
     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
 ])
@@ -60,8 +63,9 @@ train_dataset = ZipDataset("extracted_dataset/train", transform=transform)
 test_dataset = ZipDataset("extracted_dataset/test", transform=transform)
 
 # Define data loaders
-train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
-test_loader = DataLoader(test_dataset, batch_size=32)
+batch_size = 256
+train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+test_loader = DataLoader(test_dataset, batch_size=batch_size)
 
 
 # Define CNN model
@@ -75,14 +79,13 @@ class MelanomaClassifier(nn.Module):
         return self.model(x)
 
 
+# Initialize model, loss function, optimizer
 model = MelanomaClassifier()
-
-# Define loss function and optimizer
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 
 # Training loop
-num_epochs = 1
+num_epochs = 1 # cahnge to 10
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model.to(device)
 
@@ -103,23 +106,28 @@ for epoch in range(num_epochs):
     epoch_loss = running_loss / len(train_loader.dataset)
     print(f"Epoch [{epoch + 1}/{num_epochs}], Loss: {epoch_loss:.4f}")
 
-# Evaluation
+# Evaluation with Recall metric
 model.eval()
-correct = 0
-total = 0
+y_true = []
+y_pred = []
 
 with torch.no_grad():
     for images, labels in test_loader:
         images, labels = images.to(device), labels.to(device)
         outputs = model(images)
         _, predicted = torch.max(outputs, 1)
-        total += labels.size(0)
-        correct += (predicted == labels).sum().item()
 
-accuracy = correct / total
-print(f"Test Accuracy: {accuracy:.4f}")
+        y_true.extend(labels.cpu().numpy())
+        y_pred.extend(predicted.cpu().numpy())
 
+recall = recall_score(y_true, y_pred, average=None)
+recall_melanoma = recall[0]
+recall_benign = recall[1]
+accuracy = accuracy_score(y_true, y_pred)
+print(f"Recall - Melanoma: {recall_melanoma:.4f}, Benign: {recall_benign:.4f}")
+print(f"Accuracy: {accuracy:.4f}")
 
+# Streamlit app
 @st.cache
 def predict(image):
     try:
@@ -135,7 +143,6 @@ def predict(image):
         return predicted.item()  # Return the predicted class index (0 or 1)
 
 
-# Streamlit app
 def main():
     st.title('Melanoma Detection App')
     st.text('Upload a skin image to check for melanoma')
@@ -150,6 +157,10 @@ def main():
                 st.error('Warning: Melanoma detected!')
             else:
                 st.success('No signs of melanoma detected.')
+
+        # Display recall and accuracy metrics
+        st.text(f"Recall - Melanoma: {recall_melanoma:.4f}, Benign: {recall_benign:.4f}")
+        st.text(f"Accuracy: {accuracy:.4f}")
 
 
 if __name__ == '__main__':
