@@ -8,8 +8,9 @@ from torchvision import datasets, transforms, models
 import zipfile
 from PIL import Image
 import streamlit as st
+
 # Extract the dataset zip file
-with zipfile.ZipFile("C:\\Users\\shoha\\OneDrive\\מסמכים\\GitHub\\final_project\\archive.zip", "r") as zip_ref:
+with zipfile.ZipFile("C:\\Users\\shoha\\OneDrive\\מסמכים\\GitHub\\Projects\\final_project_melanoma_detection\\archive.zip", "r") as zip_ref:
     zip_ref.extractall("extracted_dataset")
 
 # Define transforms for data preprocessing
@@ -81,7 +82,7 @@ criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 
 # Training loop
-num_epochs = 3
+num_epochs = 1
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model.to(device)
 
