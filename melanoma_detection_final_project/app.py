@@ -19,8 +19,9 @@ def main():
     
 
     **How to Use:**
-    1. **Upload a Photo:** Capture an image of a suspicious skin spot.
-    2. **Receive Prediction:** Our model will analyze the image and estimate the likelihood of the spot being malignant or benign.
+    1. **Capture a Close-Up Photo:** Take a clear, close-up image of the suspicious skin spot. Ensure that the spot is well-focused and visible within the frame.
+    2. **Upload the Photo:** Use the upload feature to submit the captured image to the app.
+    3. **Receive Prediction:** Our model will analyze the uploaded image and estimate the likelihood of the spot being malignant or benign.
     """)
 
     st.markdown("---")
