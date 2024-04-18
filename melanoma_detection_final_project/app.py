@@ -1,6 +1,8 @@
 import streamlit as st
+import altair as alt
 import torch
 from torchvision import transforms
+import pandas as pd
 from PIL import Image
 from melanoma_detection_load_model import predict_single_image
 
@@ -61,8 +63,20 @@ def main():
             'Class': ['Malignant', 'Benign'],
             'Probability': [malignant_prob, benign_prob]
         }
+        # st.bar_chart(chart_data, x='Class', y='Probability')
+        df = pd.DataFrame(chart_data)
+        light_red = 'rgba(255, 0, 0, 0.5)'  # Light red (50% opacity)
+        light_green = 'rgba(0, 255, 0, 0.5)'  # Light green (50% opacity)
+        chart = alt.Chart(df).mark_bar().encode(
+            x='Class',
+            y='Probability',
+            color=alt.Color('Class', scale=alt.Scale(domain=['Malignant', 'Benign'], range=[light_red, light_green])),
+            tooltip=['Class', 'Probability']
+        ).properties(
+            width=alt.Step(80)
+        )
+        st.altair_chart(chart, use_container_width=True)
 
-        st.bar_chart(chart_data, x='Class', y='Probability', color=["red", "green"])
 
 # Run the app
 if __name__ == "__main__":
