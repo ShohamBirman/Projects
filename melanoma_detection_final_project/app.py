@@ -34,17 +34,17 @@ def main():
 
     if uploaded_file is not None:
         # Display uploaded image
-        st.subheader("Uploaded Image:")
+        st.write("###### Uploaded Image:")
         image = Image.open(uploaded_file)
         st.image(image, caption="Uploaded Image", use_column_width=True)
 
         # Preprocess the uploaded image using the transformation from load_model.py
         transformed_image = transform(image)
-        st.subheader("Transformed Image:")
+        st.write("###### Transformed Image:")
         st.image(transformed_image, caption="Transformed Image", use_column_width=True)
 
         # Make prediction on the uploaded image
-        probabilities, predicted_class = predict_single_image(uploaded_file)
+        probabilities, predicted_class = predict_single_image(transformed_image)
         malignant_prob = probabilities[0] * 100
         benign_prob = probabilities[1] * 100
 
