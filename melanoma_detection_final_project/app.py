@@ -1,4 +1,6 @@
 import streamlit as st
+import torch
+from torchvision import transforms
 from PIL import Image
 from melanoma_detection_load_model import predict_single_image
 
