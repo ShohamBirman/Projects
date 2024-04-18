@@ -59,7 +59,7 @@ def main():
         malignant_prob = probabilities[0] * 100
         benign_prob = probabilities[1] * 100
 
-        st.write("# Prediction Probabilities:")
+        st.write("###### Prediction Probabilities:")
         st.write(f"- Malignant: {malignant_prob:.2f}%")
         st.write(f"- Benign: {benign_prob:.2f}%")
 
@@ -69,10 +69,10 @@ def main():
         else:
             prediction_result = "Benign"
 
-        st.write(f"# Prediction: {prediction_result}")
+        st.write(f"###### Prediction: {prediction_result}")
 
         # Display a bar chart for prediction probabilities
-        st.write("# Prediction Visualization:")
+        st.write("###### Prediction Visualization:")
         chart_data = {
             'Class': ['Malignant', 'Benign'],
             'Probability': [malignant_prob, benign_prob]
