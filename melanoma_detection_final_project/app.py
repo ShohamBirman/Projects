@@ -61,7 +61,9 @@ def main():
             'Class': ['Malignant', 'Benign'],
             'Probability': [malignant_prob, benign_prob]
         }
-        st.bar_chart(chart_data, x='Class', y='Probability', use_container_width=True)
+        light_red = (255, 0, 0, 0.5)  # Light red (50% opacity)
+        light_green = (0, 255, 0, 0.5) # Light green (50% opacity)
+        st.bar_chart(chart_data, x='Class', y='Probability', color=[light_red, light_green])
 
 # Run the app
 if __name__ == "__main__":
