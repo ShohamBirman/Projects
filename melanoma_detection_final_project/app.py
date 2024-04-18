@@ -61,7 +61,8 @@ def main():
             'Class': ['Malignant', 'Benign'],
             'Probability': [malignant_prob, benign_prob]
         }
-        st.bar_chart(chart_data, x='Class', y='Probability')
+        #st.bar_chart(chart_data, x='Class', y='Probability')
+        st.altair_chart(chart_data, x='Class', y='Probability', theme=None, use_container_width=True)
 # Run the app
 if __name__ == "__main__":
     main()
