@@ -41,7 +41,7 @@ def main():
         # Preprocess the uploaded image using the transformation from load_model.py
         transformed_image = transform(image)
         st.write("###### Transformed Image:")
-        st.image(transformed_image, caption="Transformed Image", use_column_width=True, output_format="auto")
+        st.image(transformed_image, caption="Transformed Image", use_column_width=True, output_format="JPEG")
 
         # Make prediction on the uploaded image
         probabilities, predicted_class = predict_single_image(transformed_image)
