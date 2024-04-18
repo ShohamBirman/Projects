@@ -65,8 +65,8 @@ def main():
         }
         # st.bar_chart(chart_data, x='Class', y='Probability')
         df = pd.DataFrame(chart_data)
-        light_red = 'rgba(255, 0, 0, 0.5)'  # Light red (50% opacity)
-        light_green = 'rgba(0, 255, 0, 0.5)'  # Light green (50% opacity)
+        light_red = 'rgba(255, 0, 0, 0.7)'  # Light red
+        light_green = 'rgba(0, 255, 0, 0.7)'  # Light green
         chart = alt.Chart(df).mark_bar().encode(
             x='Class',
             y='Probability',
