@@ -2,7 +2,7 @@ import streamlit as st
 import torch
 from torchvision import transforms
 from PIL import Image
-from melanoma_detection_load_model import predict_single_image
+from melanoma_detection_load_model import predict_single_image, transform
 
 # Streamlit app
 def main():
@@ -32,30 +32,16 @@ def main():
     st.write("""💡 **Please keep in mind that while our model is highly accurate (up to 95% precision),
     the results might not be precise, and it should be used as a supplementary tool alongside professional medical evaluations.**""")
 
-    # if uploaded_file is not None:
-    #     # Display uploaded image
-    #     image = Image.open(uploaded_file)
-    #     st.image(image, caption="Uploaded Image", use_column_width=True)
-    #
-    #     # Make prediction on the uploaded image
-    #     probabilities, predicted_class = predict_single_image(uploaded_file)
-    #     malignant_prob = probabilities[0] * 100
-    #     benign_prob = probabilities[1] * 100
-    #
-    #     st.write("### Prediction Probabilities:")
-    #     st.write(f"- Malignant: {malignant_prob:.2f}%")
-    #     st.write(f"- Benign: {benign_prob:.2f}%")
-    #
-    #     if predicted_class == 0:
-    #         prediction_result = "Malignant"
-    #     else:
-    #         prediction_result = "Benign"
-    #
-    #     st.write(f"# Prediction: {prediction_result}")
     if uploaded_file is not None:
         # Display uploaded image
+        st.subheader("Uploaded Image:")
         image = Image.open(uploaded_file)
         st.image(image, caption="Uploaded Image", use_column_width=True)
+
+        # Preprocess the uploaded image using the transformation from load_model.py
+        transformed_image = transform(image)
+        st.subheader("Transformed Image:")
+        st.image(transformed_image, caption="Transformed Image", use_column_width=True)
 
         # Make prediction on the uploaded image
         probabilities, predicted_class = predict_single_image(uploaded_file)
