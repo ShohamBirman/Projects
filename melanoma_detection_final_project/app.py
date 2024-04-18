@@ -61,7 +61,7 @@ def main():
             'Class': ['Malignant', 'Benign'],
             'Probability': [malignant_prob, benign_prob]
         }
-        st.bar_chart(chart_data)
+        st.bar_chart(chart_data, x='Class', y='Probability')
 # Run the app
 if __name__ == "__main__":
     main()
