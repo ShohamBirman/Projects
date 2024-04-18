@@ -48,7 +48,7 @@ def main():
     #     else:
     #         prediction_result = "Benign"
     #
-    #     st.write(f"### Prediction: {prediction_result}")
+    #     st.write(f"# Prediction: {prediction_result}")
     if uploaded_file is not None:
         # Display uploaded image
         image = Image.open(uploaded_file)

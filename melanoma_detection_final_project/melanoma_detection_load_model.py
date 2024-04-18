@@ -3,6 +3,7 @@ import torch
 from torchvision import transforms
 from PIL import Image
 from model import MelanomaClassifier
+
 # Load the saved model weights
 model_path = r"C:\Users\shoha\OneDrive\מסמכים\GitHub\Projects\melanoma_detection_final_project\melanoma_classifier.pth"
 
