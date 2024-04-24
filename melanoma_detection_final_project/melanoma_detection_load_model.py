@@ -5,16 +5,26 @@ from PIL import Image
 from model import MelanomaClassifier
 
 # Load the saved model weights
-model_path = "melanoma_detection_final_project/melanoma_classifier.pth"
-
+#model_path = "melanoma_detection_final_project/melanoma_classifier.pth"
+model_path = r"C:\Users\shoha\OneDrive\מסמכים\GitHub\Projects\melanoma_detection_final_project\melanoma_classifier1.pth"
 # Load model on CPU (specify map_location=torch.device('cpu'))
 model = MelanomaClassifier()
 model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
 model.eval()
 
 # Define the image transformations
+# transform = transforms.Compose([
+#     transforms.Resize((224, 224)),
+#     transforms.ToTensor(),
+#     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+# ])
+
 transform = transforms.Compose([
-    transforms.Resize((224, 224)),
+    transforms.Resize((224, 224), antialias=True),  # Resize images to 224x224
+    transforms.RandomRotation(degrees=20),
+    transforms.RandomHorizontalFlip(p=0.3),
+    transforms.RandomVerticalFlip(p=0.3),
+    transforms.CenterCrop(size=(224, 224)),
     transforms.ToTensor(),
     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
 ])
