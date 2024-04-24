@@ -26,8 +26,8 @@ def main():
     3. **Receive Prediction:** Our model will analyze the uploaded image and estimate the likelihood of the spot being malignant or benign.
     """)
 
-    st.write("'A good image' for example:")
-    st.image("melanoma_detection_final_project/6625.jpg", caption="Optional Caption", width=500)
+    #st.write("'A good image' for example:")
+    #st.image("melanoma_detection_final_project/6625.jpg", caption="Optional Caption", width=500)
 
     st.markdown("---")
 
