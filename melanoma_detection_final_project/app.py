@@ -27,7 +27,7 @@ def main():
     """)
 
     st.write("'A good image' for example:")
-    st.image(r"C:\Users\shoha\OneDrive\מסמכים\GitHub\Projects\melanoma_detection_final_project\6625.jpg", caption="Optional Caption", width=500)
+    st.image("melanoma_detection_final_project/6625.jpg", caption="Optional Caption", width=500)
 
     st.markdown("---")
 
