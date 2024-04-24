@@ -6,7 +6,7 @@ from model import MelanomaClassifier
 
 # Load the saved model weights
 #model_path = "melanoma_detection_final_project/melanoma_classifier.pth"
-model_path = r"C:\Users\shoha\OneDrive\מסמכים\GitHub\Projects\melanoma_detection_final_project\melanoma_classifier1.pth"
+model_path = "https://github.com/ShohamBirman/Projects/blob/main/melanoma_detection_final_project/melanoma_classifier1.pth"
 # Load model on CPU (specify map_location=torch.device('cpu'))
 model = MelanomaClassifier()
 model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
