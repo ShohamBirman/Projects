@@ -5,7 +5,7 @@ from PIL import Image
 from model_efficientnet import MelanomaClassifier
 
 # Load the saved model weights
-model_path = r"C:\Users\shoha\OneDrive\מסמכים\GitHub\Projects\melanoma_detection_final_project\melanoma_classifier_EfficientNet1.pth"
+model_path = "melanoma_detection_final_project/melanoma_classifier_EfficientNet1.pth"
 
 # Load model on CPU (specify map_location=torch.device('cpu'))
 model = MelanomaClassifier()
