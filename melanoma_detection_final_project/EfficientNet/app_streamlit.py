@@ -2,6 +2,7 @@ import streamlit as st
 import altair as alt
 import torch
 from torchvision import transforms
+import efficientnet_pytorch
 import pandas as pd
 from PIL import Image
 from load_model import predict_single_image
