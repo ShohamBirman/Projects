@@ -2,7 +2,7 @@
 import torch
 from torchvision import transforms
 from PIL import Image
-from model import MelanomaClassifier
+from model import MelanomaClassifier1
 
 # Load the saved model weights
 #model_path = "melanoma_detection_final_project/melanoma_classifier.pth"
@@ -10,7 +10,7 @@ from model import MelanomaClassifier
 model_path = "melanoma_detection_final_project/melanoma_classifier1.pth"
 
 # Load model on CPU (specify map_location=torch.device('cpu'))
-model = MelanomaClassifier()
+model = MelanomaClassifier1()
 model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
 model.eval()
 
@@ -31,7 +31,7 @@ transform = transforms.Compose([
     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
 ])
 
-def predict_single_image(image_path):
+def predict_single_image1(image_path):
     """
     Function to predict the class probabilities of a single image.
     Args:
@@ -46,10 +46,9 @@ def predict_single_image(image_path):
     # Make prediction
     with torch.no_grad():
         output = model(image)
-        #probabilities = torch.softmax(output, dim=1)  # Convert logits to probabilities
         probabilities = torch.softmax(output, dim=1).squeeze(0).tolist()  # Convert logits to probabilities
         _, predicted = torch.max(output, 1)  # Get predicted class index
     _, predicted = torch.max(output, 1)  # Get predicted class index
 
     return probabilities, predicted.item()
-    #return probabilities.squeeze(0).tolist(), predicted.item()
+
