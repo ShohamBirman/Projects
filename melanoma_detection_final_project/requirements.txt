@@ -2,4 +2,4 @@ Pillow==10.1.0
 streamlit==1.28.2
 torch==2.2.2
 torchvision==0.17.2
-0.7.1==efficientnet_pytorch
+efficientnet_pytorch==0.7.1
