@@ -12,7 +12,7 @@ def main():
     st.title("Melanoma Detection App 🦠")
     # Description of the app
     st.write("""
-    **Welcome to the Melanoma Detection App!** A tool designed to assist in assessing skin spots for potential melanoma.
+    **Welcome to the Melanoma Detection App!** A tool designed to assist in assessing moles for potential melanoma.
 
     The primary goal of this app is to raise awareness about melanoma and emphasize the importance of routine examinations by a dermatologist.
     Early detection plays a crucial role in effective treatment and improved outcomes.
