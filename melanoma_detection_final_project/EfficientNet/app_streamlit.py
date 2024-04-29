@@ -22,7 +22,8 @@ def main():
 
 
     **How to Use:**
-    1. **Capture a Close-Up Photo:** Take a clear, close-up image of the suspicious skin spot. Ensure that the spot is well-focused and visible within the frame. **(It is recommended to edit the image before uploading it so that it focuses on the mole itself.)**
+    1. **Capture a Close-Up Photo:** Take a clear, close-up image of the suspicious skin spot. Ensure that the spot is well-focused and visible within the frame. 
+    **(It is recommended to edit the image before uploading it so that it focuses on the mole itself.)**
     2. **Upload the Photo:** Use the upload feature to submit the captured image to the app.
     3. **Receive Prediction:** Our model will analyze the uploaded image and estimate the likelihood of the spot being malignant or benign.
     """)
