@@ -42,7 +42,7 @@ def main():
         st.image(image, caption="Uploaded Image", use_column_width=True)
 
         # Make prediction on the uploaded image
-        probabilities, predicted_class = predict_single_image(image)
+        probabilities, predicted_class = predict_single_image(uploaded_file)
         malignant_prob = probabilities[0] * 100
         benign_prob = probabilities[1] * 100
 
