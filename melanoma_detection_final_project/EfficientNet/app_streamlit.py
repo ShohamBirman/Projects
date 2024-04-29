@@ -32,7 +32,7 @@ def main():
     # File uploader for image
     uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
 
-    st.write("""💡 **Please keep in mind that while our model is highly accurate (up to 95% precision),
+    st.write("""💡 **Please keep in mind that while our model is highly accurate (up to ~95% precision),
     the results might not be precise, and it should be used as a supplementary tool alongside professional medical evaluations.**""")
 
     if uploaded_file is not None:
