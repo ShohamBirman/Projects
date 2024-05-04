@@ -574,29 +574,13 @@ def main():
         submit_button = st.button("Submit")
         exit_button = st.button("Exit")
 
-        if exit_button:
+        if exit_button or end_time:
             st.write("The argument clinic session is over. Thanks for participating. Have a great day!🙏🙂")
             return
 
         if submit_button and user_input.strip():
             response = parse_input(user_input)
             st.write(f"Clinic: {response}")
-
-        #while time.time()/60 < end_time:
-         #   user_input = st.text_input("User:")
-
-          #  if user_input.lower().strip() == "exit":
-           #     break
-
-           # if user_input:
-            #    response = parse_input(user_input)
-             #   st.write(f"Clinic: {response}")
-
-           # if time.time()/60 >= end_time:
-            #    break
-
-       # st.write("The argument clinic session is over. Thanks for participating. Have a great day!🙏🙂")
-
 
 if __name__ == "__main__":
     main()
