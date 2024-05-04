@@ -574,7 +574,7 @@ def main():
         submit_button = st.button("Submit")
         exit_button = st.button("Exit")
 
-        if exit_button or ((time.time()) >= end_time):
+        if exit_button or ((time.time()/60) >= end_time):
             st.write("The argument clinic session is over. Thanks for participating. Have a great day!🙏🙂")
             return
 
