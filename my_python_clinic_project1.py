@@ -3,6 +3,7 @@ import random
 import time
 import streamlit as st
 
+# LINK FOR THE STREAMLIT APP: https://my-python-clinic-project1-py.streamlit.app
 
 def parse_input(user_input):
     """
