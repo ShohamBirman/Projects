@@ -1,5 +1,7 @@
 **Employee Attrition - Exploratory Data Analysis**
 
+* Conducted EDA and data cleaning to predict employee attrition, using manual statistical and visual methods.
+
 This repository contains an EDA project completed as part of a Data Science course.
 
 Due to the size of the notebook and the amount of visual outputs, the analysis is hosted on Google Colab.
